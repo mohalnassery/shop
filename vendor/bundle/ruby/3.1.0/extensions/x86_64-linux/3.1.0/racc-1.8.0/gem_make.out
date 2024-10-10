@@ -1,0 +1,15 @@
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.1.0/gems/racc-1.8.0/ext/racc/cparse
+/home/mohamed/.rvm/rubies/ruby-3.1.2/bin/ruby -I /home/mohamed/.rvm/rubies/ruby-3.1.2/lib/ruby/3.1.0 -r ./siteconf20241009-31216-399vi4.rb extconf.rb
+creating Makefile
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.1.0/gems/racc-1.8.0/ext/racc/cparse
+make DESTDIR\= clean
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.1.0/gems/racc-1.8.0/ext/racc/cparse
+make DESTDIR\=
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.1.0/gems/racc-1.8.0/ext/racc/cparse
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20241009-31216-q19v7a/racc

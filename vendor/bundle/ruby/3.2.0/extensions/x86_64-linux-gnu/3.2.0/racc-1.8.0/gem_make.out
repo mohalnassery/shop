@@ -1,0 +1,18 @@
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.2.0/gems/racc-1.8.0/ext/racc/cparse
+/usr/bin/ruby3.2 -I/usr/lib/ruby/vendor_ruby extconf.rb
+creating Makefile
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.2.0/gems/racc-1.8.0/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20241009-50056-yrx6ls sitelibdir\=./.gem.20241009-50056-yrx6ls clean
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.2.0/gems/racc-1.8.0/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20241009-50056-yrx6ls sitelibdir\=./.gem.20241009-50056-yrx6ls
+compiling cparse.c
+linking shared-object racc/cparse.so
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.2.0/gems/racc-1.8.0/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20241009-50056-yrx6ls sitelibdir\=./.gem.20241009-50056-yrx6ls install
+/usr/bin/install -c -m 0755 cparse.so ./.gem.20241009-50056-yrx6ls/racc
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.2.0/gems/racc-1.8.0/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20241009-50056-yrx6ls sitelibdir\=./.gem.20241009-50056-yrx6ls clean

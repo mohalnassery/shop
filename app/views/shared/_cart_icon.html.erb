@@ -1,0 +1,4 @@
+<%= link_to cart_path(@current_cart), class: "nav-link" do %>
+  <i class="fas fa-shopping-cart"></i>
+  <span class="badge badge-pill badge-primary"><%= @current_cart.cart_items.sum(:quantity) %></span>
+<% end %>

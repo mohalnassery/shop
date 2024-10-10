@@ -1,0 +1,31 @@
+module CurrentCart
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :set_current_cart
+  end
+
+  private
+
+  def set_current_cart
+    if user_signed_in?
+      @current_cart = current_user.cart || create_cart_for_user(current_user)
+    elsif session[:cart_id]
+      @current_cart = Cart.find_by(id: session[:cart_id]) || create_guest_cart
+    else
+      @current_cart = create_guest_cart
+    end
+  end
+
+  def create_cart_for_user(user)
+    cart = Cart.create(user: user)
+    user.update(cart: cart)
+    cart
+  end
+
+  def create_guest_cart
+    cart = Cart.create
+    session[:cart_id] = cart.id
+    cart
+  end
+end

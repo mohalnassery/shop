@@ -1,0 +1,15 @@
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.1.0/gems/debug_inspector-1.2.0/ext/debug_inspector
+/home/mohamed/.rvm/rubies/ruby-3.1.2/bin/ruby -I /home/mohamed/.rvm/rubies/ruby-3.1.2/lib/ruby/3.1.0 -r ./siteconf20241009-31216-ey1hkp.rb extconf.rb
+creating Makefile
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.1.0/gems/debug_inspector-1.2.0/ext/debug_inspector
+make DESTDIR\= clean
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.1.0/gems/debug_inspector-1.2.0/ext/debug_inspector
+make DESTDIR\=
+compiling debug_inspector.c
+linking shared-object debug_inspector.so
+
+current directory: /home/mohamed/reboot/shop/vendor/bundle/ruby/3.1.0/gems/debug_inspector-1.2.0/ext/debug_inspector
+make DESTDIR\= install
+/usr/bin/install -c -m 0755 debug_inspector.so ./.gem.20241009-31216-kgxhdl
