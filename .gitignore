@@ -1,1 +1,47 @@
-node_modules
+# Ignore bundler config
+/.bundle/
+
+# Ignore log files and temp files
+/log/*
+/tmp/*
+/public/system/*
+/public/uploads
+
+# Ignore environment variables
+/.env
+/.env.local
+/.env.development.local
+/.env.test.local
+/.env.production.local
+
+# Ignore compiled assets
+/public/assets
+/public/packs
+/public/packs-test
+
+# Ignore coverage reports
+/coverage/
+
+# Ignore test files
+/test/tmp
+/test/logs
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+
+# Ignore node_modules
+/node_modules/
+
+# Ignore Yarn files
+yarn-error.log
+yarn-debug.log
+
+# Ignore other files
+.DS_Store
+*.swp
+*.swo
+
+# Allow database files
+!db/*.sqlite3
+!db/*.sqlite3-journal
