@@ -16,7 +16,7 @@
             <%= f.input :remember_me, wrapper: false, as: :boolean, input_html: { class: "form-check-input" }, label_html: { class: "form-check-label" } if devise_mapping.rememberable? %>
           </div>
 
-          <%= f.button :submit, "Log in", class: "btn btn-primary btn-block" %>
+          <%= f.button :submit, "Log in", class: "btn" %>
         <% end %>
         <div class="mt-3 text-center">
           <%= render "devise/shared/links" %>

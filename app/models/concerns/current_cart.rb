@@ -1,3 +1,4 @@
+# app/models/concerns/current_cart.rb
 module CurrentCart
   extend ActiveSupport::Concern
 
@@ -15,6 +16,7 @@ module CurrentCart
     else
       @current_cart = create_guest_cart
     end
+    Rails.logger.debug "Current cart: #{@current_cart.inspect}"
   end
 
   def create_cart_for_user(user)
@@ -27,5 +29,9 @@ module CurrentCart
     cart = Cart.create
     session[:cart_id] = cart.id
     cart
+  end
+
+  def current_cart
+    @current_cart
   end
 end

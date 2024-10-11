@@ -2,7 +2,7 @@ class Product < ApplicationRecord
  
   before_destroy :not_referenced_by_any_line_item
   belongs_to :user
-  belongs_to :category, optional: true
+  belongs_to :category
   has_many :cart_items
 
   has_one_attached :image

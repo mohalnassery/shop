@@ -1,9 +1,18 @@
+# app/controllers/carts_controller.rb
 class CartsController < ApplicationController
+  include CurrentCart
+
   before_action :authenticate_user!, except: [:show, :add_item, :remove_item, :empty_cart, :update_quantity]
+  before_action :set_current_cart, except: [:show]
 
   def show
-    @cart = current_cart
-  end
+if current_user
+      @cart = current_user.cart
+    else
+      @cart = nil
+      flash[:alert] = "You need to sign in to view your cart."
+      redirect_to new_user_session_path
+    end  end
 
   def add_item
     product = Product.find(params[:product_id])
@@ -28,7 +37,6 @@ class CartsController < ApplicationController
   def update_quantity
     item = current_cart.cart_items.find(params[:item_id])
     new_quantity = params[:cart_item][:quantity].to_i
-
     if new_quantity > 0
       item.update(quantity: new_quantity)
       flash[:notice] = 'Quantity updated successfully.'
@@ -36,7 +44,6 @@ class CartsController < ApplicationController
       item.destroy
       flash[:notice] = 'Item removed from cart.'
     end
-
     redirect_to cart_path
   end
 end

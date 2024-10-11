@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = current_user.products.build
+    
   end
 
   # GET /products/1/edit
@@ -23,8 +24,7 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
-    @product = current_user.products.build(product_params)
-
+    @product = Product.new(product_params)
     if @product.save
       redirect_to @product, notice: 'Product was successfully created.'
     else
@@ -32,8 +32,11 @@ class ProductsController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /products/1
+
   def update
+    @product = Product.find(params[:id])
     if @product.update(product_params)
       redirect_to @product, notice: 'Product was successfully updated.'
     else
@@ -68,6 +71,6 @@ class ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:title, :description, :price, :category_id, :brand, :model, :condition, :finish, :image)
+    params.require(:product).permit(:name, :price, :category_id)
   end
 end

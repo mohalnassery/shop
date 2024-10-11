@@ -13,8 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
 // Custom variables
-$primary: #007bff;
 $secondary: #6c757d;
 $success: #28a745;
 $info: #17a2b8;
@@ -22,93 +22,366 @@ $warning: #ffc107;
 $danger: #dc3545;
 $light: #f8f9fa;
 $dark: #343a40;
-
 $link: #444;
 $link-hover: #222;
-
 // Import Bootstrap
 @import 'bootstrap/scss/bootstrap';
-
 // Custom styles
 body {
-  background-color: #f8f9fa;
+    background-color: #f8f9fa;
 }
 
 .navbar {
-  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
 }
 
 .card {
-  transition: transform 0.2s;
-  &:hover {
-    transform: translateY(-5px);
-  }
+    transition: transform 0.2s;
+    &:hover {
+        transform: translateY(-5px);
+    }
 }
 
 .product-show {
-  .feature-image img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,.1);
-  }
-  .add-to-cart {
-    width: 100%;
-  }
+    .feature-image img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+    }
+    .add-to-cart {
+        width: 100%;
+    }
 }
 
 .notification {
-  border-radius: 0;
+    border-radius: 0;
 }
 
 .notification:not(:last-child) {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .product-index-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    .product {
+        border: 1px solid #dee2e6;
+        border-radius: 0.25rem;
+        padding: 1rem;
+        position: relative;
+        min-height: 375px;
+        .title {
+            line-height: 1.6rem;
+        }
+        .price {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+    }
+    .product-thumb {
+        position: relative;
+        max-height: 150px;
+        overflow: hidden;
+        img {
+            max-width: 100%;
+            width: 100%;
+            &:hover {
+                opacity: .9;
+            }
+        }
+        .condition {
+            position: absolute;
+            bottom: 10px;
+            right: 9px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+        }
+    }
+}
 
-  .product {
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    padding: 1rem;
+.signUp {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.signUp {
+    background-color: #ffffff;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: auto;
+    margin-top: 15%;
+    transition: transform 0.3s ease;
+    /* Smooth transition */
+}
+
+.signUp:hover {
+    transform: translateY(-10px);
+    /* Move up by 10px */
+}
+
+.signUp .title .card-title {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.card-title {
+    color: #000
+}
+
+.signUp .form-inputs {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.signUp .form-inputs .field {
     position: relative;
-    min-height: 375px;
+    margin-bottom: 15px;
+}
 
-    .title {
-      line-height: 1.6rem;
-    }
-    .price {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-    }
-  }
+.signUp .form-inputs .field i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    font-size: 1.2rem;
+}
 
-  .product-thumb {
+.signUp .form-actions .btn,
+.card-body .btn,
+.form-actions .btn {
+    background-color: #000;
+    color: #fff;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar {
+    background-color: #000!important;
+    color: #fff;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.badge {
+    background-color: #3f3f3f!important;
+}
+
+.signUp .form-actions .btn:hover,
+.card-body .btn:hover {
+    background-color: #333;
+}
+
+.signUp .form-actions {
+    margin-bottom: 20px;
+}
+
+.signUp .social-login {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.signUp .social-login button {
+    background-color: #f5f5f5;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+
+.signUp .social-login button:hover {
+    background-color: #e0e0e0;
+}
+
+.hint {
+    font-size: 0.6rem;
+    margin-left: 10px;
+    /* Adjust the size as needed */
+    color: #666;
+    /* Optional: Adjust the color if needed */
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+// .card-title {
+//     margin-bottom: 20px;
+//     font-size: 40px; // Indicates the desired height of glyphs from the font
+//     font-weight: bold;
+//     color: #333;
+// }
+.form-group {
+    margin-bottom: 15px;
     position: relative;
-    max-height: 150px;
-    overflow: hidden;
+}
 
-    img {
-      max-width: 100%;
-      width: 100%;
-      &:hover {
-        opacity: .9;
-      }
-    }
+.form-control,
+.signUp .form-inputs .field input {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
 
-    .condition {
-      position: absolute;
-      bottom: 10px;
-      right: 9px;
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 2px 5px;
-      border-radius: 3px;
-      font-size: 0.8rem;
-    }
-  }
+.form-control:focus,
+.signUp .form-inputs .field input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    background-color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.form-check-input {
+    margin-right: 5px;
+}
+
+.form-label {
+    align-self: left;
+    float: left;
+}
+
+.card {
+    margin: auto;
+    margin-top: auto;
+}
+
+.input.select.required.product_category,
+.input.select.optional.product_brand,
+.input.select.optional.product_condition,
+.input.select.optional.product_finish,
+.input.file.optional.product_image {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    /* Adjust spacing between label and select as needed */
+    margin-top: 20px;
+}
+
+.input.select.required.product_category label,
+.input.select.optional.product_brand label,
+.input.select.optional.product_condition label,
+.input.select.optional.product_finish label {
+    margin-right: 10px;
+    display: flex;
+}
+
+.input.select.required.product_category select,
+.input.select.optional.product_brand select,
+.input.select.optional.product_condition select,
+.input.select.optional.product_finish select {
+    flex-grow: 1;
+    /* This allows the select boxes to take up equal space */
+    margin: 0;
+    /* Ensure there are no extra margins */
+    font-size: small;
+    min-height: 40px;
+    max-width: 100%;
+    /* Ensure both select elements fill the available width */
+}
+
+.input.select.optional.product_brand select,
+.input.select.required.product_category select {
+    margin-left: 0;
+    /* Remove margin differences between select elements */
+}
+
+.elements {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    /* Adjust the space between the form fields */
+    align-items: center;
+}
+
+.elements .form-control {
+    flex: 1;
+    /* Makes the input fields grow to fill the available space evenly */
+    margin: 0;
+}
+
+.sell-form {
+    min-width: 800px;
+    width: 100%;
+    left: 0px!important;
+    /* Ensure the form takes up the available space */
+}
+
+.input {
+    margin-bottom: 15px;
+}
+
+.text.required.form-control {
+    max-height: 100px;
+}
+
+.input.file.optional.product_image {
+    display: flex;
+    justify-content: space-between;
+    /* Distributes space evenly between elements */
+    align-items: center;
+    /* Centers elements vertically */
+    gap: 450px;
+    /* Adjusts the space between individual elements */
+}
+
+.update-profile {
+    min-width: 600px!important;
+    width: 70%;
 }
 
 // Import any additional custom styles
