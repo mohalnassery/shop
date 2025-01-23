@@ -1,34 +1,60 @@
-<div class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="signUp">
-        <h2 class="title is-2">Sign Up</h2>
-        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= f.error_notification %>
-          <div class="form-inputs">
-            <div class="field">
-              <i class="fas fa-user"></i>
-              <%= f.input :name, required: true, input_html: { autocomplete: "name", class: "form-control" }, label_html: { class: "form-label" } %>
-            </div>
-            <div class="field">
-              <i class="fas fa-envelope"></i>
-              <%= f.input :email, required: true, input_html: { autocomplete: "email", class: "form-control" }, label_html: { class: "form-label" } %>
-            </div>
-            <div class="field">
-              <i class="fas fa-lock"></i>
-              <%= f.input :password, required: true, input_html: { autocomplete: "new-password", class: "form-control" }, label_html: { class: "form-label" } %>
-            </div>
-            <div class="field">
-              <i class="fas fa-lock"></i>
-              <%= f.input :password_confirmation, required: true, hint: "#{@minimum_password_length} characters minimum", input_html: { autocomplete: "new-password", class: "form-control" }, label_html: { class: "form-label" } %>
-            </div>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+            <h2 class="fw-bold">Create Account</h2>
+            <p class="text-muted">Join our community today</p>
           </div>
-          <div class="form-actions">
-            <%= f.button :submit, "Get Started", class: 'btn' %>
-          </div>
-          <br />btn
-          <%= render "devise/shared/links" %>
-        <% end %>
+
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-floating mb-3">
+              <%= f.input :name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { class: 'form-control', placeholder: 'John Doe' },
+                  label_html: { class: 'form-label' },
+                  wrapper: false %>
+            </div>
+
+            <div class="form-floating mb-3">
+              <%= f.input :email,
+                  required: true,
+                  input_html: { class: 'form-control', placeholder: 'name@example.com' },
+                  label_html: { class: 'form-label' },
+                  wrapper: false %>
+            </div>
+
+            <div class="form-floating mb-3">
+              <%= f.input :password,
+                  required: true,
+                  hint: "#{@minimum_password_length} characters minimum",
+                  input_html: { class: 'form-control', placeholder: 'Password' },
+                  label_html: { class: 'form-label' },
+                  wrapper: false %>
+            </div>
+
+            <div class="form-floating mb-4">
+              <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { class: 'form-control', placeholder: 'Confirm password' },
+                  label_html: { class: 'form-label' },
+                  wrapper: false %>
+            </div>
+
+            <div class="d-grid gap-2 mb-4">
+              <%= f.button :submit, "Create Account", class: 'btn btn-primary btn-lg' %>
+            </div>
+
+            <div class="text-center">
+              <p class="text-muted">Already have an account? <%= link_to "Sign in", new_session_path(resource_name), class: 'text-primary text-decoration-none' %></p>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

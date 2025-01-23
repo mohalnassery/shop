@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Shop</title>
+    <title>Shop - Your Online Marketplace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,51 +11,68 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
       <div class="container">
-        <%= link_to 'Shop', root_path, class: 'navbar-brand' %>
+        <%= link_to root_path, class: 'navbar-brand d-flex align-items-center' do %>
+          <i class="fas fa-store me-2"></i>
+          <span class="fw-bold">Shop</span>
+        <% end %>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
+        
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav mr-auto">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <%= link_to 'Products', products_path, class: 'nav-link' %>
+              <%= link_to products_path, class: 'nav-link px-3' do %>
+                <i class="fas fa-tags me-1"></i> Products
+              <% end %>
             </li>
             <% if user_signed_in? %>
               <li class="nav-item">
-                <%= link_to 'Sell', new_product_path, class: 'nav-link' %>
+                <%= link_to new_product_path, class: 'nav-link px-3' do %>
+                  <i class="fas fa-plus-circle me-1"></i> Sell
+                <% end %>
               </li>
             <% end %>
           </ul>
+          
           <ul class="navbar-nav align-items-center">
             <% if user_signed_in? %>
               <li class="nav-item">
-                <span class="nav-link"><%= current_user.name %></span>
+                <span class="nav-link px-3">
+                  <i class="fas fa-user me-1"></i>
+                  <%= current_user.name %>
+                </span>
               </li>
               <li class="nav-item">
-                <%= link_to edit_user_registration_path, class: 'nav-link' do %>
-                  <i class="fas fa-user-edit"></i> Edit Profile
+                <%= link_to edit_user_registration_path, class: 'nav-link px-3' do %>
+                  <i class="fas fa-user-edit me-1"></i> Profile
                 <% end %>
               </li>
               <li class="nav-item">
                 <%= button_to destroy_user_session_path, 
                     method: :delete,
-                    class: 'nav-link text-danger border-0 bg-transparent',
+                    class: 'nav-link text-danger border-0 bg-transparent px-3',
                     form: { data: { turbo: false }, class: 'd-inline' } do %>
-                  <i class="fas fa-sign-out-alt"></i> Sign Out
+                  <i class="fas fa-sign-out-alt me-1"></i> Sign Out
                 <% end %>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
+                <%= link_to new_user_session_path, class: 'nav-link px-3' do %>
+                  <i class="fas fa-sign-in-alt me-1"></i> Sign In
+                <% end %>
               </li>
               <li class="nav-item">
-                <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %>
+                <%= link_to new_user_registration_path, class: 'btn btn-outline-light ms-2' do %>
+                  <i class="fas fa-user-plus me-1"></i> Sign Up
+                <% end %>
               </li>
             <% end %>
-            <li class="nav-item ms-2">
+            <li class="nav-item ms-3">
               <%= render 'shared/cart_icon' %>
             </li>
           </ul>
@@ -62,22 +80,59 @@
       </div>
     </nav>
 
-    <div class="container mt-4">
-      <% if notice %>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%= notice %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <% end %>
-      
-      <% if alert %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <%= alert %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <% end %>
+    <main class="py-4">
+      <div class="container">
+        <% if notice %>
+          <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            <%= notice %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+        
+        <% if alert %>
+          <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <%= alert %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
 
-      <%= yield %>
-    </div>
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <h5 class="mb-3">About Shop</h5>
+            <p class="text-muted">Your trusted online marketplace for buying and selling products.</p>
+          </div>
+          <div class="col-md-4 mb-3">
+            <h5 class="mb-3">Quick Links</h5>
+            <ul class="list-unstyled">
+              <li><%= link_to 'Home', root_path, class: 'text-muted text-decoration-none' %></li>
+              <li><%= link_to 'Products', products_path, class: 'text-muted text-decoration-none' %></li>
+              <% if user_signed_in? %>
+                <li><%= link_to 'Sell Product', new_product_path, class: 'text-muted text-decoration-none' %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="col-md-4 mb-3">
+            <h5 class="mb-3">Contact Us</h5>
+            <ul class="list-unstyled text-muted">
+              <li><i class="fas fa-envelope me-2"></i> support@shop.com</li>
+              <li><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+              <li><i class="fas fa-map-marker-alt me-2"></i> 123 Shop Street, City</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-4">
+        <div class="text-center text-muted">
+          <small>&copy; <%= Time.current.year %> Shop. All rights reserved.</small>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
