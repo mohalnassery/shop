@@ -50,8 +50,11 @@ class ProductsController < ApplicationController
   # POST /products/1/add_to_cart
   def add_to_cart
     quantity = params[:quantity].to_i || 1
-    current_cart.add_product(@product, quantity)
-    redirect_to @product, notice: "#{@product.title} added to your cart."
+    if @current_cart.add_product(@product)
+      redirect_to @product, notice: "#{@product.title} was added to your cart"
+    else
+      redirect_to @product, alert: "Could not add item to cart"
+    end
   end
 
   private

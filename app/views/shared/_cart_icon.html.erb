@@ -1,6 +1,6 @@
 <%= link_to cart_path(@current_cart), class: "nav-link position-relative" do %>
   <i class="fas fa-shopping-cart fa-lg"></i>
-  <% if @current_cart.cart_items.sum(:quantity) > 0 %>
+  <% if @current_cart&.cart_items&.any? %>
     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
       <%= @current_cart.cart_items.sum(:quantity) %>
       <span class="visually-hidden">items in cart</span>

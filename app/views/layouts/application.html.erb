@@ -35,9 +35,16 @@
                   <%= current_user.name %>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <%= link_to 'Edit Profile', edit_user_registration_path, class: 'dropdown-item' %>
+                  <%= link_to edit_user_registration_path, class: 'dropdown-item' do %>
+                    <i class="fas fa-user-edit me-2"></i>Edit Profile
+                  <% end %>
                   <div class="dropdown-divider"></div>
-                  <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'dropdown-item', form: { data: { turbo: false } } %>
+                  <%= button_to destroy_user_session_path, 
+                      method: :delete,
+                      class: 'dropdown-item text-danger w-100 text-start border-0 bg-transparent',
+                      form: { data: { turbo: false } } do %>
+                    <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+                  <% end %>
                 </div>
               </li>
             <% else %>

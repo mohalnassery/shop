@@ -12,11 +12,17 @@ class Cart < ApplicationRecord
 
     if current_item
       current_item.quantity += quantity
+      current_item.save
     else
-      current_item = cart_items.build(product: product, quantity: quantity)
+      current_item = cart_items.create!(
+        product: product,
+        quantity: quantity
+      )
     end
 
-    current_item.save
+    current_item
+  rescue ActiveRecord::RecordInvalid
+    false
   end
 
   def remove_product(product)

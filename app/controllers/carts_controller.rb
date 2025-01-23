@@ -2,48 +2,56 @@
 class CartsController < ApplicationController
   include CurrentCart
 
-  before_action :authenticate_user!, except: [:show, :add_item, :remove_item, :empty_cart, :update_quantity]
-  before_action :set_current_cart, except: [:show]
-
+  before_action :set_current_cart
+  
   def show
-if current_user
-      @cart = current_user.cart
-    else
-      @cart = nil
-      flash[:alert] = "You need to sign in to view your cart."
-      redirect_to new_user_session_path
-    end  end
+    @cart = @current_cart
+    if @cart.nil?
+      flash[:alert] = "Unable to find your cart."
+      redirect_to root_path
+    end
+  end
 
   def add_item
     product = Product.find(params[:product_id])
-    current_cart.add_item(product)
-    flash[:notice] = "#{product.title} added to your cart."
+    @current_cart.add_product(product)
+    flash[:notice] = "#{product.title} was added to your cart."
     redirect_back(fallback_location: root_path)
   end
 
   def remove_item
-    item = CartItem.find(params[:id])
+    item = @current_cart.cart_items.find(params[:id])
+    product_title = item.product.title
     item.destroy
-    flash[:notice] = "#{item.product.title} removed from your cart."
+    flash[:notice] = "#{product_title} was removed from your cart."
     redirect_to cart_path
   end
 
   def empty_cart
-    current_cart.cart_items.destroy_all
+    @current_cart.cart_items.destroy_all
     flash[:notice] = "Your cart has been emptied."
-    redirect_to cart_path
+    redirect_to root_path
   end
 
   def update_quantity
-    item = current_cart.cart_items.find(params[:item_id])
+    item = @current_cart.cart_items.find(params[:item_id])
     new_quantity = params[:cart_item][:quantity].to_i
+    
     if new_quantity > 0
       item.update(quantity: new_quantity)
-      flash[:notice] = 'Quantity updated successfully.'
+      flash[:notice] = 'Cart updated successfully.'
     else
+      product_title = item.product.title
       item.destroy
-      flash[:notice] = 'Item removed from cart.'
+      flash[:notice] = "#{product_title} was removed from your cart."
     end
+    
     redirect_to cart_path
+  end
+
+  private
+
+  def cart_params
+    params.require(:cart).permit(cart_items_attributes: [:id, :quantity, :_destroy])
   end
 end

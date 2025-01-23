@@ -1,31 +1,98 @@
 <div class="row justify-content-center">
   <div class="col-md-8">
-    <div class="card shadow sell-form">
+    <div class="card shadow">
       <div class="card-body">
         <%= simple_form_for @product do |f| %>
           <%= f.error_notification %>
 
           <div class="form-inputs">
-            <%= f.input :title, input_html: { class: 'form-control' } %>
-            <%= f.input :description, input_html: { class: 'form-control', rows: 5 } %>
-            <%= f.input :price, input_html: { class: 'form-control' } %>
-            <div class="elements">
-            <%= f.association :category, prompt: "Choose a category", input_html: { class: 'form-control' } %>
-            <%= f.input :brand, collection: Product::BRAND, input_html: { class: 'form-control' } %>
-                        </div>
-            <%= f.input :model, input_html: { class: 'form-control' } %>
-            <div class="elements">
-            <%= f.input :condition, collection: Product::CONDITION, input_html: { class: 'form-control' } %>
-            <%= f.input :finish, collection: Product::FINISH, input_html: { class: 'form-control' } %>
-                                    </div>
-            <%= f.input :image, input_html: { class: 'form-control-file' } %>
+            <div class="mb-4">
+              <%= f.input :title, input_html: { class: 'form-control' } %>
+            </div>
+
+            <div class="mb-4">
+              <%= f.input :description, input_html: { class: 'form-control', rows: 5 } %>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <%= f.input :price, input_html: { class: 'form-control' } %>
+              </div>
+              <div class="col-md-6">
+                <%= f.association :category, prompt: "Choose a category", input_html: { class: 'form-select' } %>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <%= f.input :brand, collection: Product::BRAND, input_html: { class: 'form-select' } %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :model, input_html: { class: 'form-control' } %>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <%= f.input :condition, collection: Product::CONDITION, input_html: { class: 'form-select' } %>
+              </div>
+              <div class="col-md-6">
+                <%= f.input :finish, collection: Product::FINISH, input_html: { class: 'form-select' } %>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <% if f.object.image.attached? %>
+                <div class="mb-3">
+                  <label class="form-label">Current Image</label>
+                  <div class="position-relative" style="max-width: 200px;">
+                    <%= image_tag f.object.image, class: 'img-fluid rounded' %>
+                  </div>
+                </div>
+              <% end %>
+              
+              <%= f.input :image,
+                label: f.object.image.attached? ? 'Change Image' : 'Upload Image',
+                input_html: { 
+                  class: 'form-control',
+                  accept: 'image/*',
+                  onchange: 'previewImage(event)'
+                } %>
+              
+              <div id="imagePreview" class="mt-2" style="display: none;">
+                <label class="form-label">Preview</label>
+                <img src="" class="img-fluid rounded" style="max-width: 200px;">
+              </div>
+            </div>
           </div>
 
-          <div class="form-actions mt-4">
+          <div class="form-actions">
             <%= f.button :submit, class: 'btn btn-primary' %>
+            <%= link_to 'Back', products_path, class: 'btn btn-outline-secondary ms-2' %>
           </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+function previewImage(event) {
+  const input = event.target;
+  const preview = document.querySelector('#imagePreview img');
+  const previewContainer = document.querySelector('#imagePreview');
+
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      previewContainer.style.display = 'block';
+    }
+    
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    previewContainer.style.display = 'none';
+  }
+}
+</script>
