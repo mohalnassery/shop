@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :add_to_cart]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :check_owner, only: [:edit, :update, :destroy]
+  before_action :set_categories, only: [:new, :edit, :create, :update]
 
   # GET /products
   def index
@@ -15,7 +16,6 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = current_user.products.build
-    
   end
 
   # GET /products/1/edit
@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
-    @product = Product.new(product_params)
+    @product = current_user.products.build(product_params)
     if @product.save
       redirect_to @product, notice: 'Product was successfully created.'
     else
@@ -32,11 +32,8 @@ class ProductsController < ApplicationController
     end
   end
 
-
   # PATCH/PUT /products/1
-
   def update
-    @product = Product.find(params[:id])
     if @product.update(product_params)
       redirect_to @product, notice: 'Product was successfully updated.'
     else
@@ -63,6 +60,10 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def set_categories
+    @categories = Category.all
+  end
+
   def check_owner
     unless @product.user == current_user
       redirect_to products_path, alert: "You are not authorized to perform this action."
@@ -71,6 +72,16 @@ class ProductsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:name, :price, :category_id)
+    params.require(:product).permit(
+      :title, 
+      :description, 
+      :price, 
+      :brand, 
+      :model, 
+      :condition, 
+      :finish, 
+      :image, 
+      :category_id
+    )
   end
 end
