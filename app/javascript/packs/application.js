@@ -1,5 +1,4 @@
 import 'stylesheets/application'
-// app/javascript/packs/application.js
 import Rails from "@rails/ujs"
 Rails.start()
 
@@ -62,6 +61,3 @@ function updateCartItemCount(count) {
         cartItemCount.textContent = count;
     }
 }
-
-import 'bootstrap'
-import '../stylesheets/application'
