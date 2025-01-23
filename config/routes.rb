@@ -11,10 +11,19 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :carts do
+    member do
+      delete :empty
+      post :checkout
+      get :success
+    end
+  end
+
   resource :cart, only: [:show] do
-    delete 'remove_item/:id', to: 'carts#remove_item', as: :remove_item
-    delete 'empty', to: 'carts#empty_cart', as: :empty
-    resources :cart_items, only: [:update], module: 'carts'
+    delete :empty, to: 'carts#empty_cart'
+    post :checkout, to: 'carts#checkout'
+    get :success, to: 'carts#success'
+    resources :cart_items, only: [:update, :destroy], controller: 'carts/cart_items'
   end
 
   root 'products#index'

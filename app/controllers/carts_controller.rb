@@ -27,10 +27,10 @@ class CartsController < ApplicationController
     redirect_to cart_path
   end
 
-  def empty_cart
+  def empty
     @current_cart.cart_items.destroy_all
     flash[:notice] = "Your cart has been emptied."
-    redirect_to root_path
+    redirect_to cart_path
   end
 
   def update_quantity
@@ -47,6 +47,17 @@ class CartsController < ApplicationController
     end
     
     redirect_to cart_path
+  end
+
+  def checkout
+    @cart = current_cart
+    redirect_to success_cart_path(@cart)
+  end
+
+  def success
+    @cart = current_cart
+    @order_number = "ORD-#{Time.current.to_i}"
+    @order_date = Time.current
   end
 
   private

@@ -1,0 +1,73 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-5">
+          <div class="text-center mb-5">
+            <i class="fas fa-check-circle text-success fa-4x mb-3"></i>
+            <h1 class="h3">Order Confirmed!</h1>
+            <p class="text-muted">Thank you for your purchase. Your order has been successfully processed.</p>
+          </div>
+
+          <div class="invoice bg-light p-4 rounded-3 mb-4">
+            <div class="d-flex justify-content-between mb-4">
+              <div>
+                <h5 class="mb-1">Invoice</h5>
+                <p class="text-muted mb-0">Order #<%= @order_number %></p>
+                <p class="text-muted mb-0">Date: <%= @order_date.strftime("%B %d, %Y") %></p>
+              </div>
+              <div class="text-end">
+                <h5 class="mb-1">Shipping Address</h5>
+                <p class="text-muted mb-0">123 Main Street</p>
+                <p class="text-muted mb-0">New York, NY 10001</p>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="table-light">
+                  <tr>
+                    <th>Product</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-end">Price</th>
+                    <th class="text-end">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @cart.cart_items.each do |item| %>
+                    <tr>
+                      <td><%= item.product.title %></td>
+                      <td class="text-center"><%= item.quantity %></td>
+                      <td class="text-end"><%= number_to_currency(item.product.price) %></td>
+                      <td class="text-end"><%= number_to_currency(item.quantity * item.product.price) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+                <tfoot class="table-light">
+                  <tr>
+                    <td colspan="3" class="text-end"><strong>Subtotal:</strong></td>
+                    <td class="text-end"><%= number_to_currency(@cart.total_price) %></td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" class="text-end"><strong>Shipping:</strong></td>
+                    <td class="text-end">$10.00</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                    <td class="text-end"><h5 class="mb-0 text-primary"><%= number_to_currency(@cart.total_price + 10) %></h5></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <%= link_to root_path, class: 'btn btn-primary' do %>
+              <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
